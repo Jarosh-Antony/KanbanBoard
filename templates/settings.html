@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Settings </title>
+  <meta name="description" content="This updates the details of user"/>
+</head>
+<body>
+	<div id="intro">   
+		<h1> Account settings </h1>
+	</div>
+	
+		<form action="/{{user.id }}/settings" method="POST" id="update-boards-form">
+			<div>
+			<label>Name:</label>
+			<input type="text" name="name" value="{{user.name}}" required />
+			</div>
+			<div>
+			<label>Password:</label>
+			<input type="password" name="password" value="{{user.password}}" required />
+			</div>
+			<div>
+			<input type="submit" value = "Submit"> 
+			</div>
+		</form>
+		
+		<a href="/{{user.id}}/delete">Delete Account</a>
+
+</body>
+</html>

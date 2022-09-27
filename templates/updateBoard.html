@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Update Board </title>
+  <meta name="description" content="This updates existing board"/>
+</head>
+<body {%if alert=='t' %} onload=" alert('Board \'{{name}}\' already exist') "{%endif%}>
+	<div id="intro">   
+		<h1> Update Board </h1>
+	</div>
+	
+		<form action="/board/{{ board.id }}/update" method="POST" id="update-boards-form">
+			<div>
+			<label>Name:</label>
+			<input type="text" name="name" value="{{board.name}}" required />
+			</div>
+			<div>
+			<input type="submit" value = "Submit"> 
+			</div>
+		</form>
+
+</body>
+</html>

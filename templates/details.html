@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Summary </title>
+  <meta name="description" content="This shows details of a card"/>
+  <style>
+          .row {
+		  display: flex;
+		}
+
+		.column {
+		  flex: 50%;
+		}
+       </style>
+</head>
+<body>
+	
+	<a href="/board/{{boardID}}">Back</a>
+	<div style="border:none;padding:20px;">
+	
+		<b>Title : {{card.title}}</b><br>
+		Description : {{card.content}}<br>
+		Deadline : {{card.deadline}}<br>
+		Status : {%if card.completed=='YES' %}completed{%else%}incomplete{%endif%}<br>
+		List name : {{list}}<br><br>
+		{%if card.completed=='YES' %}Completed on : {{card.completedD}}<br>{%endif%}
+		Created on : {{ card.createdD }}<br>
+		Last updated on : {{ card.modifiedD }}<br><br>
+		
+	</div>
+	
+</body>
+</html>

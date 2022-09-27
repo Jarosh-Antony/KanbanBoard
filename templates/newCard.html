@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Add card</title>
+  <meta name="description" content="This gives form to create new card"/>
+</head>
+<body  {%if alert=='t' %} onload=" alert('Card \'{{title}}\' already exist') "{%endif%}>
+	<div id="intro">   
+		<h1> New card </h1>
+	</div>
+	<form action="/{{ boardID }}/card/{{ listID }}/new" method="POST" id="create-card-form">
+		<div>
+			<label>Title:</label>
+			<input type="text" name="title" {%if alert=='t' %} value="{{fr.title}}" {%endif%} required />
+		</div>
+		<div>
+			<label>Description:</label>
+			<input type="text" name="content" size=50 {%if alert=='t' %} value="{{fr.content}}" {%endif%}/>
+		</div>
+		<div>
+			<label>Deadline:</label>
+			<input type="datetime-local" name="deadline" {%if alert=='t' %} value="{{fr.deadline}}" {%endif%}required />
+		</div>
+		
+		<div>
+			<input type="submit" value = "Submit">
+		</div>
+	</form>
+	
+</body>
+</html>

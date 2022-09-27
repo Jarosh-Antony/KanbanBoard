@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Summary </title>
+  <meta name="description" content="This confirms the way to delete list"/>
+  <style>
+          .row {
+		  display: flex;
+		}
+
+		.column {
+		  flex: 50%;
+		}
+       </style>
+</head>
+<body>
+	
+	<div>
+		Are you sure ?<br>
+		<form action="/{{boardID}}/list/{{ listID }}/delete" method="POST" id="delete-list-form">
+		
+			<div>
+				<input type="radio" name="action" value="del"/>
+				<label>Yes, delete the cards too</label>
+			</div>
+			
+			<div>
+				<input type="radio" name="action" value="move" checked/>
+				<label>Yes, move all cards first</label>
+			</div>
+			
+			<div>
+				<input type="radio" name="action" value="no"/>
+				<label>No</label>
+			</div>
+			
+			<input type="submit" value = "Submit"> 
+		</form>
+	</div>
+	
+</body>
+</html>

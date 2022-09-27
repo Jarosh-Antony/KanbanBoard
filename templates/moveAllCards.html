@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Move Cards </title>
+  <meta name="description" content="This moves all cards across lists"/>
+</head>
+<body {%if alert=='t' %} onload=" alert('Some cards could not be moved since target list contain cards with same title. Try after retitling unmoved cards') "{%endif%}>
+	<a href="/{{boardID}}/list/{{listID}}/delete">Back</a><br>
+	<a href="/board/{{boardID}}">Back to Board</a>
+	<div id="intro">   
+		<h1> Move all Cards </h1>
+	</div>
+	<div>
+		Select the target list :<br>
+		<form action="/{{ boardID }}/card/{{ listID }}/moveAll" method="POST" id="move-cards-form">
+			
+			{% for list in lists %}
+				{% if list.id!=listID %}
+				<div>
+				<input type="radio" name="listID" value="{{list.id}}" {% if list==lists[0] %}checked {%endif%} />
+				<label>{{list.name}}</label>
+				</div>
+				{%endif%} 
+			{%endfor%}
+			
+			
+			<div>
+			<input type="submit" value = "Submit"> 
+			</div>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Cards </title>
+  <meta name="description" content="This is the board of user"/>
+  <style>
+          .row {
+		  display: flex;
+		}
+
+		.column {
+		  flex: 50%;
+		}
+       </style>
+</head>
+<body>
+	<a href="/back/{{boardID}}">Back to Boards</a><span style="float: right;"><a href="/{{boardID}}/summary">Summary</a></span>
+	<div id="intro">  
+		<div class="row">
+			<div class="column">
+				<table id = "all-courses">
+					<tr>
+						{% for list in lists %}
+							<th style="border: none;padding:10px;">
+								{{list.name}}
+								<a href="/{{list.boardID}}/list/{{ list.id }}/update">Edit</a>
+								<a href="/{{list.boardID}}/list/{{ list.id }}/delete">Delete</a><br>
+								{%if (Ccards[list.id]|length+cards[list.id]|length)>0 %}
+								<progress max=100 value={{ (Ccards[list.id]|length/(Ccards[list.id]|length+cards[list.id]|length))*100 }} </progress>
+								{%endif%}
+							</th>
+						{% endfor %}
+						<th style="border:none;padding:10px;">
+							<a href="/list/{{ boardID }}/new">+Add List</a>
+						</th>
+					</tr>
+					<tr>
+						{% for list in lists %}
+							<td style="vertical-align:top;text-align : center;padding:5px;">
+								{% for card in cards[list.id] %}
+										<div style="border-style:inset;padding:20px;background-color:{% if card.deadline<DT %} rgb(255,234,234){%else%} rgb(234,245,255) {%endif%};">
+											<b>{{card.title}}</b>
+											<br>
+											{{card.content}}
+											<br>
+											Deadline : <span {% if card.deadline<DT %} style="color:red;" {% endif %} >{{card.deadline}}</span>
+											<br>
+											<a href="/{{ list.boardID }}/card/{{ card.id }}/update">Edit</a>
+											<a href="/{{ list.boardID }}/card/{{ card.id }}/details">Details</a>
+											<a href="/{{ list.boardID }}/card/{{ card.id }}/move">Move</a>
+											<a href="/{{ list.boardID }}/card/{{ card.id }}/completed">Completed</a>
+											<a href="/{{ list.boardID }}/card/{{ card.id }}/delete"  onclick="return confirm('Are you sure?')">Delete</a>
+										</div>
+										<br>
+								{% endfor %}
+								<a href="/{{ list.boardID }}/card/{{ list.id }}/new">+</a>
+								<br><br>
+								{% for card in Ccards[list.id] %}
+								<div style="border-style:inset;padding:20px;background-color: {% if card.completedD>card.deadline %} rgb(240,254,187) {%else %}rgb(200,255,200) {%endif%};">
+									<b>{{card.title}}</b>
+									<br>
+									{{card.content}}
+									<br>
+									Completed : <span {% if card.completedD>card.deadline %} style="color:red;" {% endif %} >{{card.completedD}}</span>
+									<br>
+									<a href="/{{ boardID }}/card/{{ card.id }}/update">Edit</a>
+									<a href="/{{ list.boardID }}/card/{{ card.id }}/details">Details</a>
+									<a href="/{{ list.boardID }}/card/{{ card.id }}/move">Move</a>
+									<a href="/{{ list.boardID }}/card/{{ card.id }}/incompleted">Incomplete</a>
+								</div>
+								<br>
+							{% endfor %}
+							
+							</td>
+						{% endfor %}
+						<td>
+							
+						</td>
+					</tr>
+				</table>
+			</div>
+			
+		</div>
+	</div>
+	
+</body>
+</html>

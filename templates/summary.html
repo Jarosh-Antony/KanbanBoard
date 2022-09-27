@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Summary </title>
+  <meta name="description" content="This renders summary page"/>
+  <style>
+          .row {
+		  display: flex;
+		}
+
+		.column {
+		  flex: 50%;
+		}
+       </style>
+</head>
+<body>
+	<a href="/board/{{boardID}}">Back to Board</a>
+	<div id="intro"> 
+		<div style="border: none;padding:15px;">
+			Select list :<br>
+			<form action="/{{ boardID }}/summary" method="POST" id="detail-list-form">
+				
+				{% for list in lists %}
+					<div>
+					<input type="radio" name="listID" value="{{list.id}}" {% if list.id==listID %}checked {%endif%} />
+					<label>{{list.name}}</label>
+					</div>
+				{%endfor%}
+				
+				
+				<div>
+				<input type="submit" value = "Submit"> <a href="/{{boardID}}/summary">Clear</a>
+				</div>
+			</form>
+		</div>
+		{%if listID>-1 %}<div style="border: none;padding:15px;color:blue;">
+			<h3>{{list}}</h3>
+		</div>
+		{%endif%}
+		{% for i in tasks %}
+			{% if i=='todo'%}
+				<div style="border: none;padding:15px;color:blue;">
+					<b> Tasks pending
+			{% elif i=='dlcross'%}
+				<div style="border: none;padding:15px;color:red;">
+					<b> Tasks pending and late
+			{% elif i=='ontime'%}
+				<div style="border: none;padding:15px;color:rgb(0,150,0);">
+					<b> Done
+			{% else %}
+				<div style="border: none;padding:15px;color:rgb(150,146,0);">
+					<b> Done late
+			{%endif%} : {{ tasks[i]|length }} </b><br>
+			{% for card in tasks[i] %}
+				{%if listID==-1 %}{{ card.ldetail.name }} : {%endif%}{{ card.title }}
+				<br>
+			{%endfor%}
+			</div>
+			
+			
+		{%endfor%}
+	</div>
+	<div>
+		<img src="/static/pieTasks.jpg" >
+	</div>
+	
+</body>
+</html>
