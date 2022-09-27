@@ -161,7 +161,7 @@ def board(boardID):
     lists=Lists.query.filter_by(boardID=boardID).all()
     cards=dict()
     Ccards=dict()
-    DT=str(datetime.datetime.now())[:16]
+    DT=str(datetime.datetime.now())
     for list in lists:
         c=Cards.query.filter_by(listID=list.id).all()
         for card in c:
@@ -266,7 +266,7 @@ def newCard(boardID,listID):
         deadline=request.form['deadline'].replace('T',' ')
         card=Cards.query.filter_by(listID=listID,title=title).first()
         if card==None:
-            createdD=str(datetime.datetime.now())[:16]
+            createdD=str(datetime.datetime.now())
             modifiedD=createdD
             newCard=Cards(title=title,content=content,deadline=deadline,listID=listID,createdD=createdD,modifiedD=modifiedD)
             db.session.add(newCard)
@@ -280,7 +280,7 @@ def newCard(boardID,listID):
 def completedCard(boardID,cardID):
     card=Cards.query.filter_by(id=cardID).first()
     card.completed='YES'
-    card.completedD=str(datetime.datetime.now())[:16]
+    card.completedD=str(datetime.datetime.now())
     db.session.commit()
     return redirect(url_for("board",boardID=boardID))
 
@@ -296,7 +296,7 @@ def detailCard(boardID,cardID):
 def incompletedCard(boardID,cardID):
     card=Cards.query.filter_by(id=cardID).first()
     card.completed='NO'
-    card.modifiedD=str(datetime.datetime.now())[:16]
+    card.modifiedD=str(datetime.datetime.now())
     db.session.commit()
     return redirect(url_for("board",boardID=boardID))
 
@@ -323,7 +323,7 @@ def updateCard(boardID,cardID):
             card.title=title
             card.content=content
             card.deadline=deadline
-            card.modifiedD=str(datetime.datetime.now())[:16]
+            card.modifiedD=str(datetime.datetime.now())
             db.session.commit()
             return redirect(url_for("board",boardID=boardID))
         fr=request.form
