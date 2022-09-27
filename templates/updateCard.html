@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Update Card </title>
+  <meta name="description" content="This updates existing cards"/>
+</head>
+<body {%if alert=='t' %} onload=" alert('Card \'{{title}}\' already exist') "{%endif%}>
+	<div id="intro">   
+		<h1> Update card </h1>
+	</div>
+	
+		<form action="/{{ boardID }}/card/{{ card.id }}/update" method="POST" id="update-card-form">
+			<div>
+			<label>Title:</label>
+			<input type="text" name="title" value="{{card.title}}" required />
+			</div>
+			<div>
+			<label>Description:</label>
+			<input type="text" name="content" size=50 value="{{card.content}}" />
+			</div>
+			<div>
+			<label>Deadline:</label>
+			<input type="datetime-local" name="deadline" value="{{card.deadline}}" required />
+			</div>
+			<div>
+			<input type="submit" value = "Submit"> 
+			</div>
+		</form>
+
+</body>
+</html>

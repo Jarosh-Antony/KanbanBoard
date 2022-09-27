@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Register</title>
+  <meta name="description" content="This registers a user"/>
+</head>
+<body {%if alert=='t' %} onload=" alert('Email already in use') "{%endif%}>
+	<div id="intro">   
+		<h1> Register </h1>
+	</div>
+		<form action="/register" method="POST" id="register">
+			<div>
+			<label>Name:</label>
+			<input type="text" name="name" {%if alert=='t' %} value={{fr.name}} {%endif%}required />
+			</div>
+			<div>
+			<label>Email:</label>
+			<input type="email" name="email" {%if alert=='t' %} value={{fr.email}} {%endif%}required />
+			</div>
+			<div>
+			<label>Password:</label>
+			<input type="password" name="password" {%if alert=='t' %} value={{fr.password}} {%endif%}required />
+			</div>
+			
+			<div>
+			<input type="submit" value = "Register">
+			</div>
+		</form>
+		<a href="/">Log In</a>
+
+</body>
+</html>

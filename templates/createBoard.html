@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Add Board </title>
+  <meta name="description" content="This gives form to create new board"/>
+</head>
+<body {%if alert=='t' %} onload=" alert('Board \'{{name}}\' already exist') "{%endif%}>
+	<div id="intro">   
+		<h1> New Board </h1>
+	</div>
+	<form action="/{{userID}}/addBoard" method="POST" id="create-board-form">
+		<div>
+			<label>Name:</label>
+			<input type="text" name="name" {%if alert=='t' %} value={{name}} {%endif%} required />
+		</div>
+		
+		
+		<div>
+			<input type="submit" value = "Submit">
+		</div>
+	</form>
+	
+</body>
+</html>

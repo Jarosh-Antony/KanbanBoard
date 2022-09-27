@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title> Move Card </title>
+  <meta name="description" content="This moves card across lists"/>
+</head>
+<body {%if alert=='t' %} onload=" alert('Card with title \'{{title}}\' already exist in target list') "{%endif%}>
+	<div id="intro">   
+		<h1> Move card </h1>
+	</div>
+	<div>
+		Select the target list :<br>
+		<form action="/{{ boardID }}/card/{{ card.id }}/move" method="POST" id="move-card-form">
+			
+			{% for list in lists %}
+				<div>
+				<input type="radio" name="listID" value="{{list.id}}" {% if list.id==card.listID %}checked {%endif%} />
+				<label>{{list.name}}</label>
+				</div>
+			{%endfor%}
+			
+			
+			<div>
+			<input type="submit" value = "Submit"> 
+			</div>
+		</form>
+	</div>
+</body>
+</html>
