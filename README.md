@@ -15,9 +15,9 @@ Venv\Scripts\activate
 
 ## Install requirements
 
-- POen the project root directory and run :
+- Open the project root directory and run :
 ```
-pip install -r requirementv2.txt
+pip install -r requirements.txt
 ```
 
 ## Run app
