@@ -27,7 +27,7 @@
 								<a href="/{{list.boardID}}/list/{{ list.id }}/update">Edit</a>
 								<a href="/{{list.boardID}}/list/{{ list.id }}/delete">Delete</a><br>
 								{%if (Ccards[list.id]|length+cards[list.id]|length)>0 %}
-								<progress max=100 value={{ (Ccards[list.id]|length/(Ccards[list.id]|length+cards[list.id]|length))*100 }} </progress>
+								<progress max=100 value={{ (Ccards[list.id]|length/(Ccards[list.id]|length+cards[list.id]|length))*100 }}> </progress>
 								{%endif%}
 							</th>
 						{% endfor %}
@@ -39,12 +39,12 @@
 						{% for list in lists %}
 							<td style="vertical-align:top;text-align : center;padding:5px;">
 								{% for card in cards[list.id] %}
-										<div style="border-style:inset;padding:20px;background-color:{% if card.deadline<DT %} rgb(255,234,234){%else%} rgb(234,245,255) {%endif%};">
+										<div style="border-style:inset;padding:20px;background-color:{% if card.deadline<DT %} rgb(255,234,234){%else%} rgb(240,240,240) {%endif%};">
 											<b>{{card.title}}</b>
 											<br>
 											{{card.content}}
 											<br>
-											Deadline : <span {% if card.deadline<DT %} style="color:red;" {% endif %} >{{card.deadline}}</span>
+											Deadline : <span {% if card.deadline<DT %} style="color:red;" {% endif %} >{{card.deadline[:16]}}</span>
 											<br>
 											<a href="/{{ list.boardID }}/card/{{ card.id }}/update">Edit</a>
 											<a href="/{{ list.boardID }}/card/{{ card.id }}/details">Details</a>
@@ -62,7 +62,7 @@
 									<br>
 									{{card.content}}
 									<br>
-									Completed : <span {% if card.completedD>card.deadline %} style="color:red;" {% endif %} >{{card.completedD}}</span>
+									Completed : <span {% if card.completedD>card.deadline %} style="color:red;" {% endif %} >{{card.completedD[:16]}}</span>
 									<br>
 									<a href="/{{ boardID }}/card/{{ card.id }}/update">Edit</a>
 									<a href="/{{ list.boardID }}/card/{{ card.id }}/details">Details</a>

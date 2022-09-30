@@ -12,21 +12,115 @@
 		.column {
 		  flex: 50%;
 		}
+		progress {
+			border:solid rgb(150,150,150) 0.1px;
+			border-radius: 10px;
+			width:30em;
+			height:0.6em;
+		}
+
+		progress::-moz-progress-bar {
+		  background: lightcolor;
+		  
+		}
+
+		progress::-webkit-progress-value {
+			background:
+				{%if card.deadline<card.createdD %}
+					rgb(200,200,200)
+				{%elif Ewidth<Awidth and card.completed=='YES'%}
+					rgb(0,208,0)
+				{%elif Ewidth<Awidth %}
+					rgb(0,125,208)
+				{%else%}
+					rgb(251,235,159)
+				{%endif%};
+			border-radius: 10px;
+		}
+
+		progress::-webkit-progress-bar {
+			background: 
+				{%if card.deadline<card.createdD and card.completed=='NO'%}
+					red
+				{%elif card.deadline<card.createdD%}
+					rgb(202,157,4)
+				{%elif Ewidth<Awidth %}
+					rgb(200,200,200)
+				{%elif card.completed=='YES'%}
+					rgb(202,157,4)
+				{%else%}
+					red{%endif%};
+			border-radius: 10px;
+		}
+		.icons{
+			width:0.8em;
+			height:0.8em;
+			position:static;
+		}
+		.mark{
+			font-size:16px;
+			
+		}
        </style>
 </head>
 <body>
-	
+		
 	<a href="/board/{{boardID}}">Back</a>
 	<div style="border:none;padding:20px;">
 	
 		<b>Title : {{card.title}}</b><br>
-		Description : {{card.content}}<br>
-		Deadline : {{card.deadline}}<br>
+		List name : {{list}}<br>
 		Status : {%if card.completed=='YES' %}completed{%else%}incomplete{%endif%}<br>
-		List name : {{list}}<br><br>
-		{%if card.completed=='YES' %}Completed on : {{card.completedD}}<br>{%endif%}
-		Created on : {{ card.createdD }}<br>
-		Last updated on : {{ card.modifiedD }}<br><br>
+		Description : {{card.content}}<br><br>
+		
+		<img src="/static/deadline.png" class="icons">   Deadline : {{card.deadline[:16]}}
+		
+		<br>
+		<br>
+		{%if card.completed=='YES' %}<img src="/static/completed.jpg" class="icons"> Completed on : {{card.completedD}}<br>{%endif%}
+		<img src="/static/created.jpg" class="icons"> Created on : {{ card.createdD }}<br><br>
+		Progress :<br><br>
+		<div style="font-size:0;">
+			<span class=mark><img src="/static/
+												{%if card.createdD<card.deadline%}
+													created.jpg
+												{%else%}
+													deadline.png
+												{%endif%}" class="icons"></span>
+			
+			<span class=mark style="padding-left:{{pos}}em;"><img src="/static/
+																				{%if card.deadline<card.createdD%}
+																					created.jpg
+																				{%elif Awidth<Ewidth%}
+																					deadline.png
+																				{%elif card.completed=='YES'%}
+																					completed.jpg
+																				{%else%}
+																					current.jpg
+																				{%endif%}" class="icons"></span>
+			
+			<span class=mark style="padding-left:{{28.4-pos}}em;"><img src="/static/
+																					{%if card.deadline<card.createdD and card.completed=='YES'%}
+																						completed.jpg
+																					{%elif card.deadline<card.createdD%}
+																						current.jpg
+																					{%elif Awidth<Ewidth and card.completed=='YES' %}
+																						completed.jpg
+																					{%elif Awidth<Ewidth%}
+																						current.jpg
+																					{%else%}
+																						deadline.png
+																					{%endif%}" class="icons"></span>
+		</div><div style="padding-left:0.4em;">
+		<progress max=100 value=
+								{%if Awidth<Ewidth%}
+									{{Awidth}}
+								{%else%}
+									{{Ewidth}}
+								{%endif%} style="vertical-align:0.2em;" ></progress><br>
+		</div>
+		<br>
+		Last updated on : {{ card.modifiedD }}
 		
 	</div>
 	

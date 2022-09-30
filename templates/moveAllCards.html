@@ -12,6 +12,7 @@
 		<h1> Move all Cards </h1>
 	</div>
 	<div>
+	{%if lists|length > 1 %}
 		Select the target list :<br>
 		<form action="/{{ boardID }}/card/{{ listID }}/moveAll" method="POST" id="move-cards-form">
 			
@@ -29,6 +30,9 @@
 			<input type="submit" value = "Submit"> 
 			</div>
 		</form>
+	{%else %}
+		No target lists available in your board
+	{%endif%}
 	</div>
 </body>
 </html>

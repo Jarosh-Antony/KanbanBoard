@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8"/>
-  <title> Boards </title>
-  <meta name="description" content="Shows the available boards"/>
+	<meta charset="UTF-8"/>
+	<title> Welcome </title>
+	<meta name="description" content="landing page of my website"/>
+	<style>
+		.center {
+			width: 50%;
+			height: 50%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			top:0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			
+			margin: auto;
+		}
+	</style>
 </head>
 <body>
-	
-		<div style="text-align:right;">
-			<a href="/{{userID}}/settings">Account settings</a>
-			<a href="/">Logout</a>
-		</div>
-		<div>
-		<h1 style="text-align:center;">Welcome {{name}}!</h1>
-	<div>  
-		<table id = "all-boards">
-			
-			{%for board in boards%}
-			<tr>
-				<td><a href="/board/{{board.id}}">{{board.name}}</a></td>
-				<td>
-				<a href="/board/{{board.id}}/update">Edit</a>
-				<a href="/board/{{board.id}}/delete" onclick="return confirm('Are you sure? All lists along with cards will be lost')">Delete</a>
-				</td>
-			
-			</tr>
-			{%endfor%}
-		</table>
-		<p align="center">
-		<a href="/{{userID}}/addBoard">+Add Board</a></p>
-			
-			
+	<div style="float: right;">
+		<a href="/login">Login</a> <a href="/register">Register</a>
 	</div>
-
+	<div class="center">
+		<h1>Welcome to my Kanban Board Application</h1>
+	</div>
 
 
 </body>

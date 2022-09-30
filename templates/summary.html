@@ -17,6 +17,7 @@
 <body>
 	<a href="/board/{{boardID}}">Back to Board</a>
 	<div id="intro"> 
+		{%if total>0%}
 		<div style="border: none;padding:15px;">
 			Select list :<br>
 			<form action="/{{ boardID }}/summary" method="POST" id="detail-list-form">
@@ -34,23 +35,25 @@
 				</div>
 			</form>
 		</div>
-		{%if listID>-1 %}<div style="border: none;padding:15px;color:blue;">
-			<h3>{{list}}</h3>
+		{%endif%}
+		{%if listID>-1 %}<div style="border: none;padding:15px;">
+			<h2>{{list}}</h2>
 		</div>
 		{%endif%}
 		{% for i in tasks %}
+			<b>
 			{% if i=='todo'%}
 				<div style="border: none;padding:15px;color:blue;">
-					<b> Tasks pending
+					Tasks pending
 			{% elif i=='dlcross'%}
 				<div style="border: none;padding:15px;color:red;">
-					<b> Tasks pending and late
+					Tasks pending and late
 			{% elif i=='ontime'%}
 				<div style="border: none;padding:15px;color:rgb(0,150,0);">
-					<b> Done
+					Done
 			{% else %}
 				<div style="border: none;padding:15px;color:rgb(150,146,0);">
-					<b> Done late
+					Done late
 			{%endif%} : {{ tasks[i]|length }} </b><br>
 			{% for card in tasks[i] %}
 				{%if listID==-1 %}{{ card.ldetail.name }} : {%endif%}{{ card.title }}
@@ -61,9 +64,11 @@
 			
 		{%endfor%}
 	</div>
+	{%if total>0%}
 	<div>
-		<img src="/static/pieTasks.jpg" >
+		<img src="/static/pieTasks.jpg">
 	</div>
+	{%endif%}
 	
 </body>
 </html>
